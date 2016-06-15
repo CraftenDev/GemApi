@@ -4,6 +4,6 @@ main: me.mickyjou.main.main
 author: Mickyjou
 commands:
      gems:
-          description; GemCommands
+          description: GemCommands
           usage: /gems (add:remove:set) [amount]
           
