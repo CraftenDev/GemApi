@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import net.md_5.bungee.api.ChatColor;
 
 public class GemCommands implements CommandExecutor {
-	
+
 	private main plugin;
 	private Player sender;
 	private java.util.UUID uuid;
@@ -37,31 +37,31 @@ public class GemCommands implements CommandExecutor {
 		Player p = (Player) sender;
 
 		if (args.length == 0) {
-			p.sendMessage("§7You've got §6" + getGems(p.getUniqueId()) + " §7Gems!");
+			p.sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD +  getGems(p.getUniqueId()) + ChatColor.GRAY + " Gems!");
 
 		} else if (args.length == 3) {
 			if (p.hasPermission("gems.add")) {
-				
-				//Admin-Commands
+
+				// Admin-Commands
 
 				if (args.length == 3) {
-					if(p.hasPermission("gems.add")) {
-					if (args[0].equalsIgnoreCase("add")) {
-						String receiver = args[1];
-						Integer amount = Integer.valueOf(args[2]);
-						addGems(receiver, amount);
-						p.sendMessage("§6" + receiver + " §7got §6" + args[2] + " §7Gems!");
-						Player s = Bukkit.getPlayer(receiver);
-						if (s != null) {
-							s.sendMessage("§7You've got §6" + args[2] + " §7by Mickyjou!");
+					if (p.hasPermission("gems.add")) {
+						if (args[0].equalsIgnoreCase("add")) {
+							String receiver = args[1];
+							Integer amount = Integer.valueOf(args[2]);
+							addGems(receiver, amount);
+							p.sendMessage("§6" + receiver + " §7got §6" + args[2] + " §7Gems!");
+							Player s = Bukkit.getPlayer(receiver);
+							if (s != null) {
+								s.sendMessage(ChatColor.GRAY +"You've got " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " by Mickyjou!");
+							}
 						}
-					}
 					} else {
 						p.sendMessage(ChatColor.RED + "You dont have permissions for that!");
 					}
 
 				} else {
-					p.sendMessage("§cWrong usage!");
+					p.sendMessage(ChatColor.RED + "Wrong usage!");
 				}
 
 				if (args.length == 3) {
@@ -69,69 +69,76 @@ public class GemCommands implements CommandExecutor {
 						if (args[0].equalsIgnoreCase("remove")) {
 							String receiver = args[1];
 							Integer amount = Integer.valueOf(args[2]);
-							if(0>amount) {
-								p.sendMessage("test");
-							}
 							if (amount != 0) {
 								if (amount >= 0) {
-									
+									if (amount <= getGems(p.getUniqueId())) {
 
-									removeGems(receiver, amount);
-									p.sendMessage("§6" + receiver + " §7lost §6" + args[2] + " §7Gems!");
-									Player s = Bukkit.getPlayer(receiver);
-									if (s != null) {
-										s.sendMessage(
-												"§7You lost §6" + args[2] + " §7Gems by §6" + p.getName() + " §7!");
+										removeGems(receiver, amount);
+										p.sendMessage(ChatColor.GOLD + receiver + ChatColor.GRAY + " lost " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " Gems!");
+										Player s = Bukkit.getPlayer(receiver);
+										if (s != null) {
+											s.sendMessage(
+												ChatColor.GRAY + "You lost " + ChatColor.GOLD + args[2] +  ChatColor.GRAY + " Gems by " + ChatColor.GOLD + p.getName() +  ChatColor.GRAY +"!");
+										}
+									} else {
+										p.sendMessage(ChatColor.RED+ "The Player §6" + ChatColor.GOLD +  receiver + ChatColor.RED + " don't have enough Gems for that!");
 									}
 
 								} else {
-									p.sendMessage("§cThe Player §6" + receiver + " §cdon't have enough Gems for that!");
+									p.sendMessage(ChatColor.RED + "The amount can't be under 0!" );
 								}
 							} else {
-								p.sendMessage("§cThe amount can't be 0!");
+								p.sendMessage(ChatColor.RED + "The amount can't be 0!");
 							}
 						}
 					} else {
 						p.sendMessage(ChatColor.RED + "You dont have permissions for that!");
 					}
 				} else {
-					p.sendMessage("§cWrong usage!");
+					p.sendMessage(ChatColor.RED + "Wrong usage!");
 				}
 				if (args.length == 3) {
 					if (p.hasPermission("gems.set")) {
 						if (args[0].equalsIgnoreCase("set")) {
 							String receiver = args[1];
 							Integer amount = Integer.valueOf(args[2]);
-							setGems(receiver, amount);
-
-							p.sendMessage("§7The Gems of §6" + receiver + " §7was set to §6" + args[2] + "§7!");
 							Player s = Bukkit.getPlayer(receiver);
 							if (s != null) {
-								s.sendMessage("§7Your gems was set to §6" + args[2] + " §7by §6" + p.getName() + "§7!");
+							setGems(receiver, amount);
+							if(amount >=0) {
+
+							p.sendMessage(ChatColor.GRAY + "The Gems of " + ChatColor.GOLD +  receiver + ChatColor.GRAY + " was set to §6" +  ChatColor.GOLD +args[2] +  ChatColor.GRAY + "!");
+							s.sendMessage(ChatColor.GRAY + "Your Gems was set to " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " by " + ChatColor.GOLD + p.getName() + ChatColor.GRAY + "!");
+							
+								
 							} else {
-								p.sendMessage("§7The player §6" + s + " §7isn't online!");
+								p.sendMessage(ChatColor.RED + "The amount can't be under 0!");
+							} 
+							} else {
+								p.sendMessage(ChatColor.GRAY + "The player " +ChatColor.GOLD +  receiver + ChatColor.GRAY + " isn't online!");
 							}
+						
 						}
 
 					} else {
 						p.sendMessage(ChatColor.RED + "You dont have permissions for that!");
 					}
 				} else {
-					p.sendMessage("§cWrong usage!");
+					p.sendMessage(ChatColor.RED + "Wrong usage!");
 				}
 
 			} else {
-				p.sendMessage("§cYou dont have Permissions for that!");
+				p.sendMessage(ChatColor.RED + "You dont have Permissions for that!");
 			}
 
 		} else {
-			p.sendMessage("§cWrong usage!");
+			p.sendMessage(ChatColor.RED + "Wrong usage!");
 		}
 
 		return true;
 	}
 
-	public Integer getGems(java.util.UUID uuid) {
+	public static Integer getGems(java.util.UUID uuid) {
 		File file = new File("plugins/GemSystem", "gems.yml");
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
@@ -140,10 +147,9 @@ public class GemCommands implements CommandExecutor {
 
 	}
 
-	public void addGems(String name, int amount) {
+	public static void addGems(String name, int amount) {
 		File file = new File("plugins/GemSystem", "gems.yml");
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-		Player p = (Player) sender;
 
 		int gems = cfg.getInt(UUID.getUUID(name) + ".gems");
 		gems = gems + amount;
@@ -156,7 +162,7 @@ public class GemCommands implements CommandExecutor {
 
 	}
 
-	public void removeGems(String name, int amount) {
+	public static void removeGems(String name, int amount) {
 		File file = new File("plugins/GemSystem", "gems.yml");
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 		int gems = cfg.getInt(UUID.getUUID(name) + ".gems");
@@ -170,7 +176,7 @@ public class GemCommands implements CommandExecutor {
 
 	}
 
-	public void setGems(String name, int amount) {
+	public static void setGems(String name, int amount) {
 
 		File file = new File("plugins/GemSystem", "gems.yml");
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
