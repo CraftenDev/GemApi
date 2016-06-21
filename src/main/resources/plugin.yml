@@ -1,9 +1,8 @@
-name: Gem
-version: 1.0
-main: me.mickyjou.main.main
+name: GemApi
+version: VERSION
+main: me.mickyjou.plugins.gems.api.GemApi
 author: Mickyjou
 commands:
      gems:
-          description: GemCommands
-          usage: /gems (add:remove:set) [amount]
-          
+          description: Gem commands
+          usage: /gems (add|remove|set) [amount]
