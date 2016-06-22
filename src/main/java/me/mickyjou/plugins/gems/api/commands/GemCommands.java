@@ -1,6 +1,6 @@
 package me.mickyjou.plugins.gems.api.commands;
 
-import me.mickyjou.plugins.gems.api.GemApi;
+import me.mickyjou.plugins.gems.api.GemProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -10,16 +10,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class GemCommands implements CommandExecutor {
-    private GemApi plugin;
+    private final GemProvider gemProvider;
 
-    public GemCommands(GemApi plugin) {
-        this.plugin = plugin;
+    public GemCommands(GemProvider gemProvider) {
+        this.gemProvider = gemProvider;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel, String[] args) {
         if (args.length == 0 && sender instanceof Player) {
-            sender.sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + plugin.getGems((Player) sender) + ChatColor.GRAY + " Gems!");
+            sender.sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + gemProvider.getGems((Player) sender) + ChatColor.GRAY + " Gems!");
         } else if (args.length == 3 && sender instanceof Player) {
             if (sender.hasPermission("gems.add")) {
                 // Admin-Commands
@@ -30,7 +30,7 @@ public class GemCommands implements CommandExecutor {
                             OfflinePlayer receiver = Bukkit.getOfflinePlayer(args[1]);
                             if (receiver != null) {
                                 Integer amount = Integer.valueOf(args[2]);
-                                plugin.addGems(receiver, amount);
+                                gemProvider.addGems(receiver, amount);
                                 sender.sendMessage("§6" + receiver + " §7got §6" + args[2] + " §7Gems!");
                                 if (receiver.getPlayer() != null) {
                                     receiver.getPlayer().sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " by Mickyjou!");
@@ -54,8 +54,8 @@ public class GemCommands implements CommandExecutor {
                             Integer amount = Integer.valueOf(args[2]);
                             if (amount != 0) {
                                 if (amount >= 0) {
-                                    if (amount <= plugin.getGems((OfflinePlayer) sender)) {
-                                        plugin.removeGems(receiver, amount);
+                                    if (amount <= gemProvider.getGems((OfflinePlayer) sender)) {
+                                        gemProvider.removeGems(receiver, amount);
                                         sender.sendMessage(ChatColor.GOLD + receiver.getName() + ChatColor.GRAY + " lost " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems!");
                                         if (receiver.getPlayer() != null) {
                                             receiver.getPlayer().sendMessage(ChatColor.GRAY + "You lost " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " Gems by " + ChatColor.GOLD + sender.getName() + ChatColor.GRAY + "!");
@@ -82,7 +82,7 @@ public class GemCommands implements CommandExecutor {
                             OfflinePlayer receiver = Bukkit.getOfflinePlayer(args[1]);
                             Integer amount = Integer.valueOf(args[2]);
                             if (receiver != null) {
-                                plugin.setGems(receiver, amount);
+                                gemProvider.setGems(receiver, amount);
                                 if (amount >= 0) {
 
                                     sender.sendMessage(ChatColor.GRAY + "The Gems of " + ChatColor.GOLD + receiver + ChatColor.GRAY + " were set to §6" + ChatColor.GOLD + args[2] + ChatColor.GRAY + "!");

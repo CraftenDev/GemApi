@@ -54,7 +54,7 @@ public class GemApi extends JavaPlugin implements GemProvider {
 
     @Override
     public void setGems(OfflinePlayer player, int amount) {
-        getPlayerData(player).set("gems", getPlayerData(player).getInt("gems") + amount);
+        getPlayerData(player).set("gems", amount);
         try {
             gems.save(gemsFile);
         } catch (IOException e) {
