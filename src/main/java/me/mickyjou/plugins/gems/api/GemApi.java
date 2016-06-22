@@ -25,7 +25,11 @@ public class GemApi extends JavaPlugin implements GemProvider {
     }
 
     private ConfigurationSection getPlayerData(OfflinePlayer player) {
-        return gems.getConfigurationSection(player.getUniqueId().toString());
+        ConfigurationSection playerSection = gems.getConfigurationSection(player.getUniqueId().toString());
+        if (playerSection == null) {
+            playerSection = gems.createSection(player.getUniqueId().toString());
+        }
+        return playerSection;
     }
 
     @Override
