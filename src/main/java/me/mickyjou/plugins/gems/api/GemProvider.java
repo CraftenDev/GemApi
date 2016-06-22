@@ -23,12 +23,13 @@ public interface GemProvider {
     void addGems(OfflinePlayer player, int amount);
 
     /**
-     * Removes gems from the given player.
+     * Removes gems from the given player, if the player has enough gems.
      *
      * @param player player
      * @param amount amount of gems to remove
+     * @return true if the player had at least the given amount of gems, false if not
      */
-    void removeGems(OfflinePlayer player, int amount);
+    boolean removeGems(OfflinePlayer player, int amount);
 
     /**
      * Sets the gems of the given player.

@@ -39,8 +39,13 @@ public class GemApi extends JavaPlugin implements GemProvider {
     }
 
     @Override
-    public void removeGems(OfflinePlayer player, int amount) {
-        setGems(player, getGems(player) - amount);
+    public boolean removeGems(OfflinePlayer player, int amount) {
+        if (getGems(player) >= amount) {
+            setGems(player, getGems(player) - amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
