@@ -5,4 +5,4 @@ author: Mickyjou
 commands:
      gems:
           description: Gem commands
-          usage: /gems (add|remove|set) [amount]
+          usage: /gems (add|remove|set) [player] <amount>
