@@ -23,6 +23,18 @@ public class GemCommands implements CommandExecutor {
                 sender.sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + gemProvider.getGems((Player) sender) + " Gems" + ChatColor.GRAY + ".");
                 return true;
             }
+        } else if (args.length == 2) {
+            if (args[0].equals("show") && sender.hasPermission("gems.show")) {
+                OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+                if (player != null) {
+                    int gems = gemProvider.getGems(player);
+                    sender.sendMessage(ChatColor.GRAY + player.getName() + " has " + ChatColor.GOLD + gems + " Gems" + ChatColor.GRAY + ".");
+                } else {
+                    sender.sendMessage(ChatColor.RED + "The player " + args[1] + " could not be found.");
+                }
+                return true;
+            }
+            return false;
         } else if (args.length == 3) {
             if (args[0].equals("pay") && sender.hasPermission("gems.pay")) {
                 if (sender instanceof Player) {

@@ -5,11 +5,14 @@ author: Mickyjou
 commands:
   gems:
     description: Gem commands
-    usage: /gems (add|remove|set|pay) <player> <amount>
+    usage: /gems (add|remove|set|pay|show) <player> <amount>
 permissions:
   gems.pay:
     description: Permission to pay gems to other players.
     default: true
+  gems.show:
+    description: Permission to see the gems of any player.
+    default: op
   gems.add:
     description: Permission to give gems to other players.
     default: op
