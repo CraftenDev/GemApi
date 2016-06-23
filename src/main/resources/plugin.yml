@@ -3,6 +3,19 @@ version: VERSION
 main: me.mickyjou.plugins.gems.api.GemApi
 author: Mickyjou
 commands:
-     gems:
-          description: Gem commands
-          usage: /gems (add|remove|set) [player] <amount>
+  gems:
+    description: Gem commands
+    usage: /gems (add|remove|set|pay) <player> <amount>
+permissions:
+  gems.pay:
+    description: Permission to pay gems to other players.
+    default: true
+  gems.add:
+    description: Permission to give gems to other players.
+    default: op
+  gems.remove:
+    description: Permission to remove gems from other players.
+    default: op
+  gems.set:
+    description: Permission to set gems of other players.
+    default: op
