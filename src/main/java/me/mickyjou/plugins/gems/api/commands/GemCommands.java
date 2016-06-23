@@ -53,9 +53,9 @@ public class GemCommands implements CommandExecutor {
                 if (receiver != null) {
                     if (amount != null && amount >= 0) {
                         gemProvider.addGems(receiver, amount);
-                        sender.sendMessage("§6" + receiver + " §7got §6" + args[2] + " §7Gems!");
+                        sender.sendMessage(ChatColor.GRAY + receiver.getName() + " got " + ChatColor.GOLD + args[2] + " Gems" + ChatColor.GRAY + ".");
                         if (receiver.isOnline()) {
-                            receiver.getPlayer().sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + args[2] + ChatColor.GRAY + " by Mickyjou!");
+                            receiver.getPlayer().sendMessage(ChatColor.GRAY + "You just got " + ChatColor.GOLD + args[2] + " Gems" + ChatColor.GRAY + " by " + sender.getName() + "!");
                         }
                     } else {
                         sender.sendMessage(ChatColor.RED + "Amount of gems to add must be a positive number.");
