@@ -10,7 +10,7 @@ permissions:
   gems.pay:
     description: Permission to pay gems to other players.
     default: true
-  gems.show:
+  gems.show.any:
     description: Permission to see the gems of any player.
     default: op
   gems.add:
