@@ -143,4 +143,37 @@ public class GemCommands implements CommandHandler {
             sender.sendMessage(ChatColor.RED + "Unknown player: " + args[0]);
         }
     }
+
+    @Command(
+            value = "pay",
+            permission = "gems.pay",
+            min = 2,
+            max = 2,
+            description = "Pay gems to a player.",
+            usage = "pay <player> <gems>"
+    )
+    public void payGems(Player player, String[] args) {
+        OfflinePlayer receiver = Bukkit.getOfflinePlayer(args[0]);
+        if (receiver != null) {
+            try {
+                Integer amount = Integer.valueOf(args[1]);
+                if (amount > 0) {
+                    if (gemProvider.removeGems(player, amount)) {
+                        gemProvider.addGems(receiver, amount);
+                        if (receiver.isOnline()) {
+                            receiver.getPlayer().sendMessage(ChatColor.GRAY + player.getName() + " sent you " + ChatColor.GOLD + " Gems" + ChatColor.GRAY + "!");
+                        }
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You don't have enough gems.");
+                    }
+                } else {
+                    player.sendMessage(ChatColor.RED + "The amount of gems must be greater than zero.");
+                }
+            } catch (NumberFormatException e) {
+                player.sendMessage(ChatColor.RED + "Invalid amount of gems: " + args[1]);
+            }
+        } else {
+            player.sendMessage(ChatColor.RED + "Unknown player: " + args[0]);
+        }
+    }
 }
