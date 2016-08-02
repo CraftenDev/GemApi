@@ -1,8 +1,12 @@
 package me.mickyjou.plugins.gems.api;
 
+import de.craften.plugins.bkcommandapi.SubCommandHandler;
 import me.mickyjou.plugins.gems.api.commands.GemCommands;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.ServicePriority;
@@ -21,7 +25,20 @@ public class GemApi extends JavaPlugin implements GemProvider {
         gems = YamlConfiguration.loadConfiguration(gemsFile);
 
         Bukkit.getServicesManager().register(GemProvider.class, this, this, ServicePriority.Normal);
-        getCommand("gems").setExecutor(new GemCommands(this));
+
+        SubCommandHandler gemCommandHandler = new SubCommandHandler("gems") {
+            @Override
+            protected void onInvalidCommand(CommandSender commandSender) {
+                commandSender.sendMessage(ChatColor.RED + "Unknown command.");
+            }
+
+            @Override
+            protected void onPermissionDenied(CommandSender commandSender, Command command, String[] strings) {
+                commandSender.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+            }
+        };
+        gemCommandHandler.addHandlers(new GemCommands(this));
+        getCommand("gems").setExecutor(gemCommandHandler);
     }
 
     private ConfigurationSection getPlayerData(OfflinePlayer player) {
