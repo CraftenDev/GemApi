@@ -48,4 +48,8 @@ public class PdsGemProvider implements GemProvider {
     public void setGems(OfflinePlayer player, int amount) {
         getStore(player).put("gemapi.gems", String.valueOf(amount));
     }
+
+    public static boolean isAvailable() {
+        return Bukkit.getServicesManager().isProvidedFor(PlayerDataStoreService.class);
+    }
 }

@@ -24,8 +24,14 @@ public class GemApi extends JavaPlugin {
 
         GemProvider provider;
         if (getConfig().getString("provider", "yaml").equals("pds")) {
-            provider = new PdsGemProvider();
-            getLogger().info("Using PlayerDataStore provider");
+            if (PdsGemProvider.isAvailable()) {
+                provider = new PdsGemProvider();
+                getLogger().info("Using PlayerDataStore provider");
+            } else {
+                getLogger().warning("PlayerDataStore isn't available");
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
         } else {
             provider = new YamlGemProvider(new File(getDataFolder(), "gems.yml"));
             getLogger().info("Using yaml file provider");
