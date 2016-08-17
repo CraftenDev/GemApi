@@ -34,7 +34,7 @@ public class GemCommands implements CommandHandler {
         } else if (sender.hasPermission("gems.show.any")) {
             OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
             if (player != null) {
-                sender.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has got " + ChatColor.GOLD + gemProvider.getGems((Player) sender) + ChatColor.GRAY + " Gems.");
+                sender.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GRAY + " has got " + ChatColor.GOLD + gemProvider.getGems(player) + ChatColor.GRAY + " Gems.");
             } else {
                 sender.sendMessage(ChatColor.RED + "Unknown player: " + args[0]);
             }
