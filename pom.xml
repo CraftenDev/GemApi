@@ -39,6 +39,11 @@
             <artifactId>BkCommandApi</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <artifactId>playerdatastore-api</artifactId>
+            <groupId>de.craften.plugins.playerdatastore</groupId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
