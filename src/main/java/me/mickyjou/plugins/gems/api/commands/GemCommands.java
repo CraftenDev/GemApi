@@ -60,7 +60,7 @@ public class GemCommands implements CommandHandler {
                 Integer amount = Integer.valueOf(args[1]);
                 if (amount > 0) {
                     gemProvider.addGems(player, amount);
-                    player.getPlayer().sendMessage(ChatColor.GRAY + player.getName() + " received " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
+                    sender.sendMessage(ChatColor.GRAY + player.getName() + " received " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
 
                     if (player.isOnline()) {
                         player.getPlayer().sendMessage(ChatColor.GRAY + "You've got " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems from " + sender.getName() + "!");
@@ -93,7 +93,7 @@ public class GemCommands implements CommandHandler {
                 if (amount > 0) {
                     if (amount <= gemProvider.getGems((OfflinePlayer) sender)) {
                         gemProvider.removeGems(player, amount);
-                        player.getPlayer().sendMessage(ChatColor.GRAY + player.getName() + " lost " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
+                        sender.sendMessage(ChatColor.GRAY + player.getName() + " lost " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
 
                         if (player.isOnline()) {
                             player.getPlayer().sendMessage(ChatColor.GRAY + "You were taken " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems by " + sender.getName() + ".");
@@ -128,7 +128,7 @@ public class GemCommands implements CommandHandler {
                 Integer amount = Integer.valueOf(args[1]);
                 if (amount >= 0) {
                     gemProvider.setGems(player, amount);
-                    player.getPlayer().sendMessage(ChatColor.GRAY + player.getName() + " now has " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
+                    sender.sendMessage(ChatColor.GRAY + player.getName() + " now has " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
 
                     if (player.isOnline()) {
                         player.getPlayer().sendMessage(ChatColor.GRAY + "Your gems were set to " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems by " + sender.getName() + ".");
