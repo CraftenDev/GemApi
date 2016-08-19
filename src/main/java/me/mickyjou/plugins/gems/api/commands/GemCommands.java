@@ -171,6 +171,7 @@ public class GemCommands implements CommandHandler {
                         if (receiver.isOnline()) {
                             receiver.getPlayer().sendMessage(ChatColor.GRAY + player.getName() + " sent you " + ChatColor.GOLD + amount + " Gems" + ChatColor.GRAY + "!");
                         }
+                        player.sendMessage(ChatColor.GRAY + "You sent " + ChatColor.GOLD + amount + " Gems" + ChatColor.GRAY + " to " + receiver.getName() + ".");
                     } else {
                         player.sendMessage(ChatColor.RED + "You don't have enough gems.");
                     }
