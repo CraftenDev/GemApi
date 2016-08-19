@@ -45,6 +45,14 @@ public class GemCommands implements CommandHandler {
     }
 
     @Command(
+            value = "",
+            description = "Show your gems"
+    )
+    public Result showPlayerGems(Player player) {
+        return showGems(player, new String[0]);
+    }
+
+    @Command(
             value = "add",
             permission = "gems.add",
             min = 2,
