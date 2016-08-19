@@ -99,7 +99,7 @@ public class GemCommands implements CommandHandler {
             try {
                 Integer amount = Integer.valueOf(args[1]);
                 if (amount > 0) {
-                    if (amount <= gemProvider.getGems((OfflinePlayer) sender)) {
+                    if (amount <= gemProvider.getGems(player)) {
                         gemProvider.removeGems(player, amount);
                         sender.sendMessage(ChatColor.GRAY + player.getName() + " lost " + ChatColor.GOLD + amount + ChatColor.GRAY + " Gems.");
 
