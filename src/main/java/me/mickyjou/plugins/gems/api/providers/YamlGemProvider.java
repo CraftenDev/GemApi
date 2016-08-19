@@ -50,7 +50,9 @@ public class YamlGemProvider implements GemProvider {
 
     @Override
     public void setGems(OfflinePlayer player, int amount) {
-        getPlayerData(player).set("gems", amount);
+        ConfigurationSection playerSection = getPlayerData(player);
+        playerSection.set("gems", amount);
+        gems.set(player.getUniqueId().toString(), playerSection);
         try {
             gems.save(gemsFile);
         } catch (IOException e) {
