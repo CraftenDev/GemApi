@@ -1,21 +1,17 @@
 package me.mickyjou.plugins.gems.api;
 
-import de.craften.plugins.bkcommandapi.SubCommandHandler;
 import me.mickyjou.plugins.gems.api.commands.GemCommands;
 import me.mickyjou.plugins.gems.api.providers.PdsGemProvider;
+import de.craften.plugins.bkcommandapi.SubCommandHandler;
 import me.mickyjou.plugins.gems.api.providers.YamlGemProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public class GemApi extends JavaPlugin {
     @Override
