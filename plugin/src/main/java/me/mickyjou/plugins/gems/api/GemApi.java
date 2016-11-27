@@ -48,5 +48,9 @@ public class GemApi extends JavaPlugin {
         };
         gemCommandHandler.addHandlers(new GemCommands(provider));
         getCommand("gems").setExecutor(gemCommandHandler);
+
+        if(getServer().getPluginManager().isPluginEnabled("JSONAPI")) {
+            new JsonApiHandler().register();
+        }
     }
 }

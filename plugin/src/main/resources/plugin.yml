@@ -2,7 +2,7 @@ name: GemApi
 version: VERSION
 main: me.mickyjou.plugins.gems.api.GemApi
 author: Mickyjou
-softdepend: [PlayerDataStore]
+softdepend: [PlayerDataStore, JSONAPI]
 commands:
   gems:
     description: Gem commands
